@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mm.pp.clicker">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Needed to start the SmartAutoClickerService as a foreground service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Needed to use the media projection with SmartAutoClickerService. Starting with SDK 34 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" /> <!-- Needed to display the overlay_menu over other apps -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- Needed to prompt the permission request at the right time -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Clicker">
+        <service
+            android:name=".service.HttpService"
+            android:enabled="true"
+            android:exported="false"></service>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Clicker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.ClickerService"
+            android:canPerformGestures="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <!-- 必须创建clickerxml文件 -->
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/clickerxml" />
+        </service>
+
+    </application>
+
+</manifest>
