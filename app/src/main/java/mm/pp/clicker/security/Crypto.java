@@ -48,16 +48,17 @@ public class Crypto {
 
     @AfterReturning(value = "jointPoint()",returning = "result")
     public Object decryptoData(Object result) {
+        if (HomeViewViewModel.password.getValue()) {
+            Log.d("aspectj", "data changed!");
+            byte[] encryptedHEX = hexStringToByteArray(((HttpServer.MyString) result).str);
 
-        Log.d("aspectj", "data changed!");
-        byte[] encryptedHEX = hexStringToByteArray(((HttpServer.MyString) result).str);
 
-
-        try {
-            ((HttpServer.MyString) result).str= decrypt(encryptedHEX,CryptoKey.key);
-        } catch (Exception exception) {
-            Log.e("aspectj","",exception);
-            //exception.printStackTrace();
+            try {
+                ((HttpServer.MyString) result).str = decrypt(encryptedHEX, CryptoKey.key);
+            } catch (Exception exception) {
+                Log.e("aspectj", "", exception);
+                //exception.printStackTrace();
+            }
         }
         return result;
     }

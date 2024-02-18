@@ -30,7 +30,7 @@ public class ClickerService extends AccessibilityService {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "BindService-->onCreate()");
+        Log.d(TAG, "BindService-->onCreate()");
         super.onCreate();
         registerReceiver(receiver, new IntentFilter("mm.pp.clicker.broadcast"));
         //click(100,100);

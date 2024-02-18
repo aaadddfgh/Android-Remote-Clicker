@@ -57,7 +57,7 @@ public class HttpServer extends NanoHTTPD {
 
 
                 return newFixedLengthResponse("ok");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e("", "error when reading", e);
                 return newFixedLengthResponse("wrong");
             }

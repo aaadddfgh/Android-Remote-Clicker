@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import mm.pp.clicker.viewmodel.HomeViewViewModel;
+
 
 public class HttpService extends Service {
     private static HttpService instance=null;
@@ -17,6 +19,9 @@ public class HttpService extends Service {
         return instance;
     }
 
+    public static Boolean isServiceRuning(){
+        return  instance!=null;
+    }
 
     public HttpService() {
     }
@@ -35,7 +40,7 @@ public class HttpService extends Service {
         super.onCreate();
         instance=this;
         try {
-            server = new HttpServer(8080);
+            server = new HttpServer(Integer.valueOf(HomeViewViewModel.port.getValue()));
             server.start();
             Log.d("HttpService", "Server started on port " + PORT);
         } catch (IOException e) {
@@ -58,6 +63,7 @@ public class HttpService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        instance=null;
         // 停止HttpServer
         if (server != null) {
             server.stop();

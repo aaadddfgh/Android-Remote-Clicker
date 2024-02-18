@@ -1,5 +1,6 @@
 package mm.pp.clicker.view;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -14,8 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import mm.pp.clicker.R;
 import mm.pp.clicker.security.Crypto;
@@ -24,7 +30,9 @@ import mm.pp.clicker.service.HttpService;
 import mm.pp.clicker.viewmodel.HomeViewViewModel;
 
 public class HomeView extends Fragment {
-
+    Timer timer;
+    Button stopButton;
+    Button startButton;
     private HomeViewViewModel mViewModel;
 
     public static HomeView newInstance() {
@@ -42,6 +50,7 @@ public class HomeView extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(HomeViewViewModel.class);
         EditText port = getView().findViewById(R.id.editTextPort);
+        port.setText(mViewModel.port.getValue());
         EditText key = getView().findViewById(R.id.editTextKey);
         port.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -51,8 +60,8 @@ public class HomeView extends Fragment {
             }
         });
 
-        Button button =getView().findViewById(R.id.stop);
-        button.setOnClickListener(new View.OnClickListener() {
+        stopButton =getView().findViewById(R.id.stop);
+        stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent serverintent = new Intent(getContext(), HttpService.class );
@@ -60,9 +69,9 @@ public class HomeView extends Fragment {
             }
         });
 
-        button =getView().findViewById(R.id.start);
+        startButton =getView().findViewById(R.id.start);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CryptoKey.key=key.getText().toString();
@@ -71,6 +80,60 @@ public class HomeView extends Fragment {
             }
         });
 
+        CheckBox checkBox = getView().findViewById(R.id.checkBox);
+
+        checkBox.setChecked(mViewModel.password.getValue());
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                key.setEnabled(b);
+                mViewModel.password.setValue(b);
+            }
+        });
+
+        HomeViewViewModel.serverRunning.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                startButton.setEnabled(! HomeViewViewModel.serverRunning.getValue());
+                stopButton.setEnabled( HomeViewViewModel.serverRunning.getValue());
+            }
+        });
+
+        timer=new Timer();
+        timer.schedule(new CommitTimer(),100,1000);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(timer==null) {
+            timer = new Timer();
+            timer.schedule(new CommitTimer(), 100, 1000);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if(timer!=null)
+            timer.cancel();
+        timer=null;
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(timer!=null)
+            timer.cancel();
+        timer=null;
+    }
+
+    class CommitTimer extends TimerTask {
+        @Override
+        public void run() {
+            HomeViewViewModel.serverRunning.postValue(HttpService.isServiceRuning());
+        }
     }
 
 }
