@@ -88,7 +88,11 @@ public class HomeView extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 key.setEnabled(b);
+
+                key.setVisibility(b? View.VISIBLE:View.INVISIBLE);
+                getView().findViewById(R.id.textNeedKey).setVisibility(b? View.VISIBLE:View.INVISIBLE);
                 mViewModel.password.setValue(b);
+
             }
         });
 

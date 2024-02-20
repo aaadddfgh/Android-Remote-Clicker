@@ -31,7 +31,7 @@ public class HttpServer extends NanoHTTPD {
         return new MyString(new String(data, 0, len,"UTF-8"));
     }
 
-    private static CommandDTO getDTO(IHTTPSession session) throws IOException {
+    private static <T> T getDTO(IHTTPSession session,Class<T> value) throws IOException {
         byte[] data = new byte[10000];
         int n = session.getInputStream().read(data);
 
@@ -39,7 +39,7 @@ public class HttpServer extends NanoHTTPD {
 
         ObjectMapper objectMapper =new ObjectMapper();
         Log.d("", s);
-        return objectMapper.readValue(s, CommandDTO.class);
+        return objectMapper.readValue(s,value);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class HttpServer extends NanoHTTPD {
 
         if(Method.POST == session.getMethod()) {
             try {
-                CommandDTO command = getDTO(session);
+                CommandDTO command = getDTO(session,CommandDTO.class);
                 if(true){
                     Intent intent = new Intent("mm.pp.clicker.broadcast");
                     intent.setAction("mm.pp.clicker.broadcast");
