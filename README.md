@@ -1,4 +1,4 @@
-# clicker slave
+# Clicker client app
 
 This is a remote click app.
 
