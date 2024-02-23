@@ -1,13 +1,9 @@
 package mm.pp.clicker.security;
 
-import android.util.Base64;
 import android.util.Log;
-
-import androidx.lifecycle.ViewModelProvider;
 
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import java.nio.charset.StandardCharsets;
@@ -16,7 +12,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import mm.pp.clicker.service.HttpServer;
-import mm.pp.clicker.view.HomeView;
 import mm.pp.clicker.viewmodel.HomeViewViewModel;
 
 @Aspect
@@ -48,7 +43,7 @@ public class Crypto {
 
     @AfterReturning(value = "jointPoint()",returning = "result")
     public Object decryptoData(Object result) {
-        if (HomeViewViewModel.password.getValue()) {
+        if (HomeViewViewModel.needPassword.getValue()) {
             Log.d("aspectj", "data changed!");
             byte[] encryptedHEX = hexStringToByteArray(((HttpServer.MyString) result).str);
 

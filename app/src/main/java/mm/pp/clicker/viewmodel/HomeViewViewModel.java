@@ -6,6 +6,6 @@ import androidx.lifecycle.ViewModel;
 public class HomeViewViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     public static MutableLiveData<String> port = new MutableLiveData<>("8080");
-    public static MutableLiveData<Boolean> password =new MutableLiveData<>(true);
+    public static MutableLiveData<Boolean> needPassword =new MutableLiveData<>(false);
     public static MutableLiveData<Boolean> serverRunning =new MutableLiveData<>(false);
 }

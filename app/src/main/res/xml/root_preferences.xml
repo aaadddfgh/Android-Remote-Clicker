@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <SwitchPreference
+            app:key="reboot"
+            app:title="@string/start_reboot"
+            app:defaultValue="false"/>
+
+</PreferenceScreen>

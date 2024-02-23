@@ -2,6 +2,7 @@ package mm.pp.clicker.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.GestureDescription;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,23 +15,26 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import androidx.core.app.NotificationCompat;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 
+import mm.pp.clicker.R;
 import mm.pp.clicker.tools.Command;
 import mm.pp.clicker.tools.CommandResolver;
 
 
 public class ClickerService extends AccessibilityService {
-    private static final String TAG = "ClickerService";
+    private static final String TAG = "mm.pp.clicker.ClickerService";
 
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "BindService-->onCreate()");
+        Log.d(TAG, ">onCreate");
         super.onCreate();
         registerReceiver(receiver, new IntentFilter("mm.pp.clicker.broadcast"));
         //click(100,100);
@@ -86,6 +90,16 @@ public class ClickerService extends AccessibilityService {
     //Service被启动时调用
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(intent.getBooleanExtra("reboot",false)){
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"mm.pp.clicker")
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentTitle("clicker")
+                    .setContentText("已启动")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(NotificationManager.class);
+            //notificationManager.notify(122,);
+            startForeground(122,builder.build());
+        }
         //Log.i(TAG, "onStartCommand方法被调用!");
         return super.onStartCommand(intent, flags, startId);
     }
