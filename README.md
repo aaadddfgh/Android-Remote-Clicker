@@ -43,5 +43,19 @@ Except following files, all files is under GPL-3.0
 
 # Use Builder
 
+Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/CommandBuilderTest.java).
+``` java
+CommandBuilder commandBuilder=new CommandBuilder();
 
+commandBuilder=commandBuilder
+        .click(1,2)
+        .sleep(100)
+        .swipe(100,200,300,400)
+        .swipe(100,200,300,400,500)
+        .swipe(100,200,300,400,500,1000)
+;
+
+String out=commandBuilder.build();
+// click 1 2;sleep 100;swipe 100 200 300 400;swipe 100 200 300 400 500;swipe 100 200 300 400 500 1000;
+```
 
