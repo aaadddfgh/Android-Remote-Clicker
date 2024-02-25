@@ -41,7 +41,7 @@ Except following files, all files is under GPL-3.0
 
 1. mm.pp.clicker.tools.**  -> The MIT LICENSE
 
-# Use Builder
+# Use CommandBuilder
 
 Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/CommandBuilderTest.java).
 ``` java
