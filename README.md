@@ -34,3 +34,14 @@ These commands simulate the following actions:
 1. Click at the coordinates (100, 200).
 2. Wait for 1000 ms.
 3. Swipe from coordinates (100, 200) to coordinates (300, 400).
+
+# LICENSE
+
+Except following files, all files is under GPL-3.0
+
+1. mm.pp.clicker.tools.**  -> The MIT LICENSE
+
+# Use Builder
+
+
+
