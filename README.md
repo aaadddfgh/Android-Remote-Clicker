@@ -83,4 +83,5 @@ commandBuilder=commandBuilder
 String out=commandBuilder.build();
 // click 1 2;sleep 100;swipe 100 200 300 400;swipe 100 200 300 400 500;swipe 100 200 300 400 500 1000;
 ```
-
+## js/ts lib
+Find here [npm](https://www.npmjs.com/package/clicker-master-lib) and [github](https://github.com/aaadddfgh/clicker-master-lib)
