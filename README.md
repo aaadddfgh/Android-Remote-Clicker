@@ -45,6 +45,9 @@ Except following files, all files is under GPL-3.0
 
 Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/).
 ``` java
+
+// CommandJsonBuilder needs "com.fasterxml.jackson.core:jackson-databind
+
 CommandJsonBuilder commandJsonBuilder=new CommandJsonBuilder();
 commandJsonBuilder
         .click(1,2)
