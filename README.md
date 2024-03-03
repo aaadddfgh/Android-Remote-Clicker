@@ -40,9 +40,11 @@ These commands simulate the following actions:
 Except following files, all files is under GPL-3.0
 
 1. mm.pp.clicker.tools.**  -> The MIT LICENSE
+2. mm.pp.clicker.master.lib.** -> The MIT LICENSE
 
 # Use CommandJsonBuilder and CommandBuilder
 
+You can directly copy `mm.pp.clicker.master.lib.**` to your project.  
 Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/).
 ``` java
 
