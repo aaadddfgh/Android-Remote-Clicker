@@ -21,6 +21,7 @@ public class Crypto {
     public static String decrypt(byte[] encryptedBytes, String key) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
+        // TODO AES/ECB/PKCS5Padding is NOT a safe crypto method, change to a safer method (CFB or other).
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
