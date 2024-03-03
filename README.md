@@ -41,9 +41,29 @@ Except following files, all files is under GPL-3.0
 
 1. mm.pp.clicker.tools.**  -> The MIT LICENSE
 
-# Use CommandBuilder
+# Use CommandJsonBuilder and CommandBuilder
 
-Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/CommandBuilderTest.java).
+Example can be find in [Builder example](https://github.com/aaadddfgh/Android-Remote-Clicker/blob/main/app/src/test/java/mm/pp/clicker/).
+``` java
+CommandJsonBuilder commandJsonBuilder=new CommandJsonBuilder();
+commandJsonBuilder
+        .click(1,2)
+        .sleep(100)
+        .swipe(100,200,300,400)
+        .swipe(100,200,300,400,500)
+        .swipe(100,200,300,400,500,1000)
+;
+
+String out=commandJsonBuilder.buildString();
+/**
+ * Output string
+ * {"commands":"click 1 2;sleep 100;swipe 100 200 300 400;swipe 100 200 300 400 500;swipe 100 200 300 400 500 1000;"}
+ */
+
+
+System.out.println(out);
+```
+
 ``` java
 CommandBuilder commandBuilder=new CommandBuilder();
 
