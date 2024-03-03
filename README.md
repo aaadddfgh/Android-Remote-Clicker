@@ -4,7 +4,7 @@ This is a remote click app.
 
 It uses HTTP to control your device.
 
-If you can not root your device to allow remote control, you can consider this app.
+If you can not root your device or use USB debug on old version android, you can consider this app.
 
 # How to use
 
