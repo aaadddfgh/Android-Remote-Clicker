@@ -24,6 +24,11 @@ Make POST request to yourDevicesIP:port (default 8080) with following body:
 ```
 Your device should click at Point(x:100,y:200) automatically.
 
+# Feature
+1. Remote clicker via network without root or adb.
+2. Auto start after reboot.
+3. Auto wake before click.
+
 # Example Commands
 
 ``` 
@@ -39,7 +44,7 @@ These commands simulate the following actions:
 
 # LICENSE
 
-Except following files, all files is under GPL-3.0
+Except following files, this software and all other files is under GPL-3.0
 
 1. mm.pp.clicker.tools.**  -> The MIT LICENSE
 2. mm.pp.clicker.master.lib.** -> The MIT LICENSE
