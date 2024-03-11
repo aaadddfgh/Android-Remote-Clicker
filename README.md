@@ -4,6 +4,8 @@ This is a remote click app.
 
 It uses HTTP to control your device.
 
+If you can not root your device or use USB debug on old version android, you can consider this app.
+
 # How to use
 
 0. Make sure privilege
@@ -83,4 +85,5 @@ commandBuilder=commandBuilder
 String out=commandBuilder.build();
 // click 1 2;sleep 100;swipe 100 200 300 400;swipe 100 200 300 400 500;swipe 100 200 300 400 500 1000;
 ```
-
+## js/ts lib
+Find here [npm](https://www.npmjs.com/package/clicker-master-lib) and [github](https://github.com/aaadddfgh/clicker-master-lib)
