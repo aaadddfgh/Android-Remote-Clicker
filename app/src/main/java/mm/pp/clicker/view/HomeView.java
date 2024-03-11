@@ -3,6 +3,7 @@ package mm.pp.clicker.view;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.PowerManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ import mm.pp.clicker.security.Crypto;
 import mm.pp.clicker.security.CryptoKey;
 import mm.pp.clicker.service.HttpService;
 import mm.pp.clicker.viewmodel.HomeViewViewModel;
+
+import static android.content.Context.POWER_SERVICE;
 
 public class HomeView extends Fragment {
     Timer timer;
@@ -162,8 +166,10 @@ public class HomeView extends Fragment {
     }
 
     class CommitTimer extends TimerTask {
+        
         @Override
         public void run() {
+
             HomeViewViewModel.serverRunning.postValue(HttpService.isServiceRuning());
         }
     }

@@ -22,6 +22,9 @@
     <!-- Sync Preferences -->
     <string name="start_reboot">开机自启</string>
     <string name="reboot_title">开机后自动启动</string>
+
+    <string name="wake_title">熄屏时会唤醒</string>
+
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>

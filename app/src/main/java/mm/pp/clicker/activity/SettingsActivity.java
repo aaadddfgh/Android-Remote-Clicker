@@ -3,6 +3,7 @@ package mm.pp.clicker.activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -36,15 +37,36 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()== android.R.id.home){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public static class SettingsFragment extends PreferenceFragmentCompat {
 
         @Override
         public boolean onPreferenceTreeClick(Preference preference) {
 
-            SharedPreferences.Editor editer = getActivity().getSharedPreferences("mm.pp.clicker", MODE_PRIVATE).edit();
-            SwitchPreference switchPreference= findPreference("reboot");
-            editer.putBoolean("reboot", switchPreference.isChecked() );
-            editer.commit();
+            switch (preference.getKey()){
+                case "reboot":{
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("mm.pp.clicker", MODE_PRIVATE).edit();
+                    SwitchPreference switchPreference= findPreference("reboot");
+                    editor.putBoolean("reboot", switchPreference.isChecked() );
+                    editor.commit();
+                    break;
+                }
+                case "wake":{
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("mm.pp.clicker", MODE_PRIVATE).edit();
+                    SwitchPreference switchPreference= findPreference("wake");
+                    editor.putBoolean("wake", switchPreference.isChecked() );
+                    editor.commit();
+                }
+            }
+
+
 
             return super.onPreferenceTreeClick(preference);
 

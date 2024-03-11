@@ -4,5 +4,8 @@
             app:key="reboot"
             app:title="@string/start_reboot"
             app:defaultValue="false"/>
-
+        <SwitchPreference
+            app:key="wake"
+            app:title="@string/wake_title"
+            app:defaultValue="false"/>
 </PreferenceScreen>

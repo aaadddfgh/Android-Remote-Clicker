@@ -14,7 +14,7 @@ import mm.pp.clicker.security.CryptoKey;
 import mm.pp.clicker.service.HttpServer;
 import mm.pp.clicker.viewmodel.HomeViewViewModel;
 
-@Aspect
+
 public class ServiceLogger {
     private static final String TAG  = "mm.pp.clicker.service";
 

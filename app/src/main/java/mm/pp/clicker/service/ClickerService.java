@@ -2,6 +2,7 @@ package mm.pp.clicker.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.GestureDescription;
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.content.IntentFilter;
 import android.graphics.Path;
 
 import android.graphics.Point;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,8 +44,16 @@ public class ClickerService extends AccessibilityService {
 
     // 只有在startService()启动Service的情况下才调用
     private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @SuppressLint("InvalidWakeLockTag")
         @Override
         public void onReceive(Context context, Intent intent) {
+            if(context.getSharedPreferences("mm.pp.clicker",Context.MODE_PRIVATE).getBoolean("wake",false)) {
+                PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock mWakelock;
+                mWakelock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "bright"); //  this target for tell OS which app control screen
+                mWakelock.acquire(1000L);
+            }
+
             String s = intent.getStringExtra("commands");
             ArrayList<Command> commands;
 
